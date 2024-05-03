@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.Objects;
 
 /**
- * 2024年4月27日
+ * 2024/4/27
  *
  * @author ZZHow
  * @version 1.0

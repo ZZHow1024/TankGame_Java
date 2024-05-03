@@ -1,7 +1,7 @@
 package zzhow.tankgame;
 
 /**
- * 2024年4月27日
+ * 2024/4/27
  *
  * @author ZZHow
  * @version 1.0
