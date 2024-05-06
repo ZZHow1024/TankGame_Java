@@ -1,5 +1,7 @@
 # [Java项目]坦克大战_TankGame（中文说明）
 
+[**English**](https://github.com/ZZHow1024/TankGame_Java/blob/main/README_EN.md)
+
 学习 Java 的入门小项目，争取最终达到可玩的程度
 
 项目来源：韩顺平老师[[**https://space.bilibili.com/651245581**](https://space.bilibili.com/651245581)]
