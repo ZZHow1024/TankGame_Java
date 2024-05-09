@@ -14,9 +14,7 @@ public class EnemyTank extends Tank implements Runnable {
     public static final int BULLET_NUMBER_MAX = 5;
     public static final int TYPE = 1;
     public static int currentBulletNumber = BULLET_NUMBER_MAX;
-    //  private final Vector<Bullet> bullets = new Vector<>(); //弃用 Vector
     private final CopyOnWriteArrayList<Bullet> bullets = new CopyOnWriteArrayList<>();
-    //  private boolean isLive = true; //已提升至父类 Tank 中
 
     public EnemyTank() {
     }
