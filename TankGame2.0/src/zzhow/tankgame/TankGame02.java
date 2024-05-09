@@ -22,7 +22,7 @@ public class TankGame02 extends JFrame {
         myPanel = new MyPanel();
         ImageIcon imageIcon;
         try {
-            imageIcon = new ImageIcon(Objects.requireNonNull(MyPanel.class.getResource("/logo64.png")));
+            imageIcon = new ImageIcon(Objects.requireNonNull(MyPanel.class.getResource("/images/logo64.png")));
             this.setIconImage(imageIcon.getImage());
         } catch (Exception e) {
             System.out.println("未找到 logo64.png");
