@@ -43,17 +43,17 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     {
         //加载图片
         try {
-            image = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("/logo.png"));
+            image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo.png"));
         } catch (Exception e) {
             System.out.println("未找到 logo.png");
         }
         try {
-            image64 = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("/logo64.png"));
+            image64 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo64.png"));
         } catch (Exception e) {
             System.out.println("未找到 logo64.png");
         }
         try {
-            bomb0 = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("/bomb.gif"));
+            bomb0 = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/bomb.gif"));
         } catch (Exception e) {
             System.out.println("未找到 bomb.gif");
         }
