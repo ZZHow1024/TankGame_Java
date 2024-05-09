@@ -72,7 +72,7 @@ public class EnemyTank extends Tank implements Runnable {
 
             //根据坦克的方向继续移动 30 步
             for (int i = 0; i < 30; i++) {
-                //一百分之一的概率随机射击
+                //三十五分之一的概率随机射击
                 if (random.nextInt(35) == 0)
                     this.shootBullet();
 
