@@ -9,12 +9,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @version 2.0
  * 我方坦克
  */
-public class MyTank extends Tank {
+public class MyTank extends Tank implements Runnable{
     public static final int BULLET_NUMBER_MAX = 5;
     public static final int TYPE = 0;
     public static int currentBulletNumber = BULLET_NUMBER_MAX;
     private Bullet bullet = null;
     private final CopyOnWriteArrayList<Bullet> bullets = new CopyOnWriteArrayList<>(); //使用线程安全的 CopyOnWriteArrayList
+    private int move = -1;
 
     public MyTank() {
     }
@@ -54,5 +55,31 @@ public class MyTank extends Tank {
 
     public CopyOnWriteArrayList<Bullet> getBullets() {
         return bullets;
+    }
+
+    public int getMove() {
+        return move;
+    }
+
+    public void setMove(int move) {
+        this.move = move;
+    }
+
+    @Override
+    public void run() {
+        while (isLive()) {
+            switch (move) {
+                case MyPanel.UPWARD -> moveUp();
+                case MyPanel.DOWNWARD -> moveDown();
+                case MyPanel.LEFT -> moveLeft();
+                case MyPanel.RIGHT -> moveRight();
+            }
+
+            try {
+                Thread.sleep(25);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

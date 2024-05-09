@@ -72,7 +72,7 @@ public class EnemyTank extends Tank implements Runnable {
                     case MyPanel.RIGHT -> moveRight();
                 }
                 try {
-                    Thread.sleep(32);
+                    Thread.sleep(25);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

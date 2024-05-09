@@ -40,6 +40,9 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     //定义炸弹集合
     Vector<Bomb> bombs = new Vector<>();
 
+    //按键相关
+    private boolean spaceKeyPressed = false;
+
     {
         //加载图片
         try {
@@ -62,6 +65,8 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     public MyPanel() {
         //初始化我方坦克
         this.myTank = new MyTank(450, 300, MyPanel.UPWARD, 3);
+        //启动我方坦克线程
+        new Thread(myTank).start();
 
         //初始化敌方坦克
         for (int i = 0; i < enemyTankQuantity; i++) {
@@ -94,7 +99,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 
         //画出坦克：调用 drawTank() 方法
         //①画出我方坦克（补充判断是否存活）
-        if(myTank.isLive())
+        if (myTank.isLive())
             drawTank(myTank.getX(), myTank.getY(), g, myTank.getDirection(), MyTank.TYPE);
         //②画出敌方坦克和子弹
         for (int i = 0; i < enemyTanks.size(); i++) {
@@ -203,22 +208,32 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W)
-            myTank.moveUp();
+            myTank.setMove(MyPanel.UPWARD);
         else if (e.getKeyCode() == KeyEvent.VK_A)
-            myTank.moveLeft();
+            myTank.setMove(MyPanel.LEFT);
         else if (e.getKeyCode() == KeyEvent.VK_S)
-            myTank.moveDown();
+            myTank.setMove(MyPanel.DOWNWARD);
         else if (e.getKeyCode() == KeyEvent.VK_D)
-            myTank.moveRight();
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE && myTank.isLive() && (MyTank.currentBulletNumber > 0))
+            myTank.setMove(MyPanel.RIGHT);
+        else if (!spaceKeyPressed && e.getKeyCode() == KeyEvent.VK_SPACE && myTank.isLive() && (MyTank.currentBulletNumber > 0)) {
+            spaceKeyPressed = true;
             myTank.shootBullet();
-
-        repaint();
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_W)
+            myTank.setMove(-1);
+        else if (e.getKeyCode() == KeyEvent.VK_A)
+            myTank.setMove(-1);
+        else if (e.getKeyCode() == KeyEvent.VK_S)
+            myTank.setMove(-1);
+        else if (e.getKeyCode() == KeyEvent.VK_D)
+            myTank.setMove(-1);
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            spaceKeyPressed = false;
+        }
     }
 
     //判断我方子弹是否击中坦克
@@ -268,8 +283,8 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             }
 
             //判断是否击中了我方坦克
-            for(EnemyTank enemyTank : enemyTanks) {
-                for(Bullet bullet : enemyTank.getBullets()) {
+            for (EnemyTank enemyTank : enemyTanks) {
+                for (Bullet bullet : enemyTank.getBullets()) {
                     if (bullet != null && bullet.isLive() && myTank.isLive() && hitTank(bullet, myTank))
                         myTank.setLive(false);
                 }
@@ -278,7 +293,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             this.repaint();
 
             try {
-                Thread.sleep(30);
+                Thread.sleep(25);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
