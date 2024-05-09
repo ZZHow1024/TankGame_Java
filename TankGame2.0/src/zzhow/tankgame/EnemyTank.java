@@ -33,14 +33,6 @@ public class EnemyTank extends Tank implements Runnable {
         return bullets;
     }
 
-//    public boolean isLive() {
-//        return isLive;
-//    }
-//
-//    public void setLive(boolean live) {
-//        isLive = live;
-//    }
-
     public void shootBullet() {
         if (EnemyTank.currentBulletNumber > 0) {
             //当前子弹数减 1
