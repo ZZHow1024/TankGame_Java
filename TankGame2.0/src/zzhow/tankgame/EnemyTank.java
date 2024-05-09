@@ -16,7 +16,7 @@ public class EnemyTank extends Tank implements Runnable {
 
     public static final int BULLET_NUMBER_MAX = 5;
     public static final int TYPE = 1;
-    public static int currentBulletNumber = BULLET_NUMBER_MAX;
+    public int currentBulletNumber = BULLET_NUMBER_MAX;
     private final CopyOnWriteArrayList<Bullet> bullets = new CopyOnWriteArrayList<>();
 
     public EnemyTank() {
@@ -43,9 +43,9 @@ public class EnemyTank extends Tank implements Runnable {
     }
 
     public void shootBullet() {
-        if (EnemyTank.currentBulletNumber > 0) {
+        if (this.currentBulletNumber > 0) {
             //当前子弹数减 1
-            --EnemyTank.currentBulletNumber;
+            --this.currentBulletNumber;
 
             //创建 Bullet 对象
             Bullet bullet = switch (this.getDirection()) {
@@ -72,8 +72,8 @@ public class EnemyTank extends Tank implements Runnable {
 
             //根据坦克的方向继续移动 30 步
             for (int i = 0; i < 30; i++) {
-                //十分之一的概率随机射击
-                if (random.nextInt(10) == 0)
+                //三十分之一的概率随机射击
+                if (random.nextInt(30) == 0)
                     this.shootBullet();
 
                 switch (getDirection()) {

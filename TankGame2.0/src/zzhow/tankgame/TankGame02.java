@@ -19,7 +19,7 @@ public class TankGame02 extends JFrame {
     }
 
     public TankGame02() {
-        myPanel = new MyPanel();
+        myPanel = new MyPanel(this);
         ImageIcon imageIcon;
         try {
             imageIcon = new ImageIcon(Objects.requireNonNull(MyPanel.class.getResource("/images/logo64.png")));

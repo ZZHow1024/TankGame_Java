@@ -14,6 +14,8 @@ import java.util.Vector;
  * 游戏绘图区域
  */
 public class MyPanel extends JPanel implements KeyListener, Runnable {
+    TankGame02 tankGame02;
+
     //游戏状态
     private boolean win = false;
 
@@ -68,7 +70,9 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         }
     }
 
-    public MyPanel() {
+    public MyPanel(TankGame02 tankGame02) {
+        this.tankGame02 = tankGame02;
+
         //初始化我方坦克
         this.myTank = new MyTank(450, 300, MyPanel.UPWARD, 3);
         //启动我方坦克线程
@@ -101,10 +105,6 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 
         //关闭画板线程
         this.loop = false;
-
-        if (enemyTanks.isEmpty()) {
-
-        }
     }
 
     @Override
@@ -157,7 +157,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
                         g.fillOval(bullet.getX(), bullet.getY(), 6, 6);
                     } else {
                         enemyTank.getBullets().remove(bullet);
-                        ++EnemyTank.currentBulletNumber;
+                        ++enemyTank.currentBulletNumber;
                     }
                 }
             }
@@ -270,8 +270,11 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             myTank.setMove(-1);
         else if (e.getKeyCode() == KeyEvent.VK_D)
             myTank.setMove(-1);
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
             spaceKeyPressed = false;
+        else if (e.getKeyCode() == KeyEvent.VK_R) {
+            new TankGame02();
+            tankGame02.dispose();
         }
     }
 
