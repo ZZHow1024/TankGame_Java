@@ -1,21 +1,18 @@
 package zzhow.tankgame;
 
 /**
- * 2024/4/27
+ * 2024/5/3
  *
  * @author ZZHow
- * @version 1.0
+ * @version 2.0
  * 坦克父类
  */
 public class Tank {
-    public static final int UPWARD = 0;
-    public static final int DOWNWARD = 1;
-    public static final int LEFT = 2;
-    public static final int RIGHT = 3;
     private int x = 0; //坦克横坐标
     private int y = 0; //坦克纵坐标
-    private int direction = Tank.UPWARD; //坦克方向
+    private int direction = MyPanel.UPWARD; //坦克方向
     private int speed = 1; //坦克速度
+    private boolean isLive = true;
 
     public Tank() {
     }
@@ -64,27 +61,39 @@ public class Tank {
         this.speed = speed;
     }
 
-    public void moveUp(){
-        if(direction != Tank.UPWARD)
-            this.direction = Tank.UPWARD;
-        y -= this.speed;
+    public boolean isLive() {
+        return isLive;
     }
 
-    public void moveDown(){
-        if(direction != Tank.DOWNWARD)
-            this.direction = Tank.DOWNWARD;
-        y += this.speed;
+    public void setLive(boolean live) {
+        isLive = live;
     }
 
-    public void moveLeft(){
-        if(direction != Tank.LEFT)
-            this.direction = Tank.LEFT;
-        x -= this.speed;
+    public void moveUp() {
+        if (direction != MyPanel.UPWARD)
+            this.direction = MyPanel.UPWARD;
+        if (0 < y)
+            this.y -= this.speed;
     }
 
-    public void moveRight(){
-        if(direction != Tank.RIGHT)
-            this.direction = Tank.RIGHT;
-        x += this.speed;
+    public void moveDown() {
+        if (direction != MyPanel.DOWNWARD)
+            this.direction = MyPanel.DOWNWARD;
+        if (y + 60 < MyPanel.HEIGHT)
+            this.y += this.speed;
+    }
+
+    public void moveLeft() {
+        if (direction != MyPanel.LEFT)
+            this.direction = MyPanel.LEFT;
+        if (0 < x)
+            this.x -= this.speed;
+    }
+
+    public void moveRight() {
+        if (direction != MyPanel.RIGHT)
+            this.direction = MyPanel.RIGHT;
+        if (x + 60 < MyPanel.WIDTH)
+            this.x += this.speed;
     }
 }
