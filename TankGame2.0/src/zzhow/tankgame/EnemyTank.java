@@ -11,6 +11,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * 敌方坦克
  */
 public class EnemyTank extends Tank implements Runnable {
+    //线程状态
+    private boolean loop = true;
+
     public static final int BULLET_NUMBER_MAX = 5;
     public static final int TYPE = 1;
     public static int currentBulletNumber = BULLET_NUMBER_MAX;
@@ -29,6 +32,14 @@ public class EnemyTank extends Tank implements Runnable {
 
     public CopyOnWriteArrayList<Bullet> getBullets() {
         return bullets;
+    }
+
+    public boolean isLoop() {
+        return loop;
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
     }
 
     public void shootBullet() {
@@ -54,7 +65,7 @@ public class EnemyTank extends Tank implements Runnable {
 
     @Override
     public void run() {
-        while (isLive()) {
+        while (loop && isLive()) {
             //随机改变坦克方向 0、1、2、3
             Random random = new Random();
             setDirection(random.nextInt(4));

@@ -14,6 +14,12 @@ import java.util.Vector;
  * 游戏绘图区域
  */
 public class MyPanel extends JPanel implements KeyListener, Runnable {
+    //游戏状态
+    private boolean win = false;
+
+    //线程状态
+    private boolean loop = true;
+
     //游戏区域的高和宽
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 750;
@@ -79,6 +85,28 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         }
     }
 
+    public void gameOver() {
+        //关闭我方所有子弹线程
+        for (Bullet bullet : myTank.getBullets())
+            bullet.setLoop(false);
+        //关闭我方坦克线程
+        myTank.setLoop(false);
+
+        //关闭敌方所有子弹线程
+        for (EnemyTank enemyTank : enemyTanks) {
+            for (Bullet bullet : enemyTank.getBullets())
+                bullet.setLoop(false);
+            enemyTank.setLoop(false);
+        }
+
+        //关闭画板线程
+        this.loop = false;
+
+        if (enemyTanks.isEmpty()) {
+
+        }
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -97,6 +125,17 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         g.setFont(new Font("MiSans", Font.BOLD, 50));
         g.drawString("@author ZZHow", 260, 700);
 
+        //游戏状态
+        if (!loop) {
+            g.setColor(Color.orange);
+            if (win) {
+                g.setFont(new Font("MiSans", Font.ITALIC, 50));
+                g.drawString("WIN", 415, HEIGHT / 4);
+            } else {
+                g.setFont(new Font("MiSans", Font.ITALIC, 50));
+                g.drawString("DEFEAT", 375, HEIGHT / 4);
+            }
+        }
         //画出坦克：调用 drawTank() 方法
         //①画出我方坦克（补充判断是否存活）
         if (myTank.isLive())
@@ -236,7 +275,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         }
     }
 
-    //判断我方子弹是否击中坦克
+    //判断子弹是否击中坦克
     public boolean hitTank(Bullet bullet, Tank tank) {
         switch (tank.getDirection()) {
             case MyPanel.UPWARD:
@@ -275,18 +314,25 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (loop) {
             //判断是否击中了敌方坦克
             for (Bullet bullet : myTank.getBullets()) {
-                if (bullet != null && bullet.isLive())
+                if (bullet != null && bullet.isLive()) {
                     enemyTanks.removeIf(enemyTank -> hitTank(bullet, enemyTank));
+                    if (enemyTanks.isEmpty()) {
+                        this.win = true;
+                        gameOver(); //游戏结束
+                    }
+                }
             }
 
             //判断是否击中了我方坦克
             for (EnemyTank enemyTank : enemyTanks) {
                 for (Bullet bullet : enemyTank.getBullets()) {
-                    if (bullet != null && bullet.isLive() && myTank.isLive() && hitTank(bullet, myTank))
+                    if (bullet != null && bullet.isLive() && myTank.isLive() && hitTank(bullet, myTank)) {
                         myTank.setLive(false);
+                        gameOver(); //游戏结束
+                    }
                 }
             }
 

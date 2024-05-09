@@ -8,6 +8,9 @@ package zzhow.tankgame;
  * 子弹
  */
 public class Bullet implements Runnable {
+    //线程状态
+    private boolean loop = true;
+
     private int x; //子弹横坐标
     private int y; //子弹纵坐标
     private int direction = MyPanel.UPWARD; //子弹方向
@@ -68,10 +71,18 @@ public class Bullet implements Runnable {
         isLive = live;
     }
 
+    public boolean isLoop() {
+        return loop;
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
+    }
+
     @Override
     public void run() {
         //射击行为
-        while (isLive) {
+        while (loop && isLive) {
             switch (direction) {
                 case MyPanel.UPWARD:
                     y -= speed;

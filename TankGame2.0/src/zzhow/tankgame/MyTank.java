@@ -9,7 +9,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @version 2.0
  * 我方坦克
  */
-public class MyTank extends Tank implements Runnable{
+public class MyTank extends Tank implements Runnable {
+    //线程状态
+    private boolean loop = true;
+
     public static final int BULLET_NUMBER_MAX = 5;
     public static final int TYPE = 0;
     public static int currentBulletNumber = BULLET_NUMBER_MAX;
@@ -65,9 +68,17 @@ public class MyTank extends Tank implements Runnable{
         this.move = move;
     }
 
+    public boolean isLoop() {
+        return loop;
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
+    }
+
     @Override
     public void run() {
-        while (isLive()) {
+        while (loop && isLive()) {
             switch (move) {
                 case MyPanel.UPWARD -> moveUp();
                 case MyPanel.DOWNWARD -> moveDown();
