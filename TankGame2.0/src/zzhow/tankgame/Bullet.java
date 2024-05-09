@@ -72,7 +72,6 @@ public class Bullet implements Runnable {
     public void run() {
         //射击行为
         while (isLive) {
-            System.out.println("Bullet " + x + ", " + y + ", " + direction);
             switch (direction) {
                 case MyPanel.UPWARD:
                     y -= speed;
@@ -89,7 +88,6 @@ public class Bullet implements Runnable {
             }
 
             if (!(0 <= x && x <= 1000 && 0 <= y && y <= 750)) {
-                System.out.println("子弹线程退出");
                 isLive = false;
                 break;
             }
