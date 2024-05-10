@@ -15,7 +15,7 @@ public class MyTank extends Tank implements Runnable {
 
     public static final int BULLET_NUMBER_MAX = 5;
     public static final int TYPE = 0;
-    public static int currentBulletNumber = BULLET_NUMBER_MAX;
+    public int currentBulletNumber = BULLET_NUMBER_MAX;
     private Bullet bullet = null;
     private final CopyOnWriteArrayList<Bullet> bullets = new CopyOnWriteArrayList<>(); //使用线程安全的 CopyOnWriteArrayList
     private int move = -1;
@@ -32,7 +32,7 @@ public class MyTank extends Tank implements Runnable {
     }
 
     public void shootBullet() {
-        --MyTank.currentBulletNumber;
+        --this.currentBulletNumber;
         //创建 Bullet 对象
         switch (this.getDirection()) {
             case MyPanel.UPWARD:
