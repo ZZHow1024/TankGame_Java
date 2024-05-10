@@ -18,6 +18,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     Timer timer = null;
 
     //游戏状态
+    private boolean start = false;
     private boolean win = false;
 
     //线程状态
@@ -76,22 +77,31 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 
         //初始化我方坦克
         this.myTank = new MyTank(450, 300, MyPanel.UPWARD, 3);
-        //启动我方坦克线程
-        new Thread(myTank).start();
 
         //初始化敌方坦克
         for (int i = 0; i < enemyTankQuantity; i++) {
             //创建一个敌方坦克
             EnemyTank enemyTank = new EnemyTank((i + 1) * 100 + 250, 100, MyPanel.DOWNWARD, 3);
-            //启动敌方坦克线程，让敌方坦克运动
-            new Thread(enemyTank).start();
+
             //添加敌方坦克
             enemyTanks.add(enemyTank);
         }
+    }
+
+    public void gameStart() {
+        //启动我方坦克线程
+        new Thread(myTank).start();
+
+        //启动敌方坦克线程，让敌方坦克运动
+        for (EnemyTank enemyTank : enemyTanks)
+            new Thread(enemyTank).start();
 
         //初始化计时器
         timer = new Timer();
         timer.start();
+
+        //游戏正式开始
+        start = true;
     }
 
     public void gameOver() {
@@ -130,7 +140,13 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         g.setFont(new Font("MiSans", Font.BOLD, 20));
         g.drawString("Bullet Number：" + myTank.currentBulletNumber + " / " + MyTank.BULLET_NUMBER_MAX, 5, 60);
         g.drawString("Enemy Tank Number：" + this.enemyTanks.size() + " / " + MyPanel.enemyTankTotalNumber, 5, 85);
-        g.drawString("time: " + String.format("%.2f", timer.getTime()), 5, 110);
+        g.drawString("Move: W/A/S/D", 820, 60);
+        g.drawString("Shooting: Space bar", 820, 85);
+        g.drawString("Replay: R", 820, 110);
+        if (start)
+            g.drawString("time: " + String.format("%.2f", timer.getTime()), 5, 110);
+        else
+            g.drawString("Press \"Enter\" to start the game", 300, HEIGHT / 4 + 20);
         g.setFont(new Font("MiSans", Font.BOLD, 50));
         g.drawString("@author ZZHow", 260, 700);
 
@@ -266,7 +282,8 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         else if (!spaceKeyPressed && e.getKeyCode() == KeyEvent.VK_SPACE && myTank.isLive() && (myTank.currentBulletNumber > 0)) {
             spaceKeyPressed = true;
             myTank.shootBullet();
-        }
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER && !this.start)
+            gameStart();
     }
 
     @Override

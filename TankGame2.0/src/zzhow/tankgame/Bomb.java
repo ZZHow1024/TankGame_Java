@@ -4,6 +4,7 @@ package zzhow.tankgame;
  * 2024/5/5
  *
  * @author ZZHow
+ * 炸弹
  */
 public class Bomb {
     private int x; //炸弹横坐标
