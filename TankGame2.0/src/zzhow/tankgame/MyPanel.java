@@ -14,7 +14,8 @@ import java.util.Vector;
  * 游戏绘图区域
  */
 public class MyPanel extends JPanel implements KeyListener, Runnable {
-    TankGame02 tankGame02;
+    TankGame02 tankGame02 = null;
+    Timer timer = null;
 
     //游戏状态
     private boolean win = false;
@@ -87,9 +88,16 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             //添加敌方坦克
             enemyTanks.add(enemyTank);
         }
+
+        //初始化计时器
+        timer = new Timer();
+        timer.start();
     }
 
     public void gameOver() {
+        //关闭计时器线程
+        timer.setLoop(false);
+
         //关闭我方所有子弹线程
         for (Bullet bullet : myTank.getBullets())
             bullet.setLoop(false);
@@ -122,6 +130,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         g.setFont(new Font("MiSans", Font.BOLD, 20));
         g.drawString("Bullet Number：" + MyTank.currentBulletNumber + " / " + MyTank.BULLET_NUMBER_MAX, 5, 60);
         g.drawString("Enemy Tank Number：" + this.enemyTanks.size() + " / " + MyPanel.enemyTankTotalNumber, 5, 85);
+        g.drawString("time: " + String.format("%.2f", timer.getTime()), 5, 110);
         g.setFont(new Font("MiSans", Font.BOLD, 50));
         g.drawString("@author ZZHow", 260, 700);
 
