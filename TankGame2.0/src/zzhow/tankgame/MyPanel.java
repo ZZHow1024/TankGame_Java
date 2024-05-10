@@ -141,7 +141,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         g.drawString("Bullet Number：" + myTank.currentBulletNumber + " / " + MyTank.BULLET_NUMBER_MAX, 5, 60);
         g.drawString("Enemy Tank Number：" + this.enemyTanks.size() + " / " + MyPanel.enemyTankTotalNumber, 5, 85);
         g.drawString("Move: W/A/S/D", 820, 60);
-        g.drawString("Shooting: Space bar", 820, 85);
+        g.drawString("Shooting: Space", 820, 85);
         g.drawString("Replay: R", 820, 110);
         if (start)
             g.drawString("time: " + String.format("%.2f", timer.getTime()), 5, 110);
@@ -279,7 +279,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             myTank.setMove(MyPanel.DOWNWARD);
         else if (e.getKeyCode() == KeyEvent.VK_D)
             myTank.setMove(MyPanel.RIGHT);
-        else if (!spaceKeyPressed && e.getKeyCode() == KeyEvent.VK_SPACE && myTank.isLive() && (myTank.currentBulletNumber > 0)) {
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE && start && !spaceKeyPressed && myTank.isLive() && (myTank.currentBulletNumber > 0)) {
             spaceKeyPressed = true;
             myTank.shootBullet();
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER && !this.start)
