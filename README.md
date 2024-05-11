@@ -9,7 +9,7 @@
 ---
 Website：
 
-[[Java项目]坦克大战_TankGame | ZZHow](https://www.zzhow.com/article/TankGame)
+[[Java项目]坦克大战_TankGame | ZZHow](https://www.zzhow.com/TankGame)
 
 Source Code：
 
