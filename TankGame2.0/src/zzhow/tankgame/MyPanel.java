@@ -89,6 +89,9 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     }
 
     public void gameStart() {
+        //启动画板线程
+        new Thread(this).start();
+
         //启动我方坦克线程
         new Thread(myTank).start();
 
