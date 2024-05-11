@@ -1,6 +1,7 @@
 package zzhow.tankgame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Objects;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Objects;
  * 游戏入口
  */
 public class TankGame02 extends JFrame {
+    private Image ico = null;
     MyPanel myPanel = null;
 
     public static void main(String[] args) {
@@ -20,13 +22,12 @@ public class TankGame02 extends JFrame {
 
     public TankGame02() {
         myPanel = new MyPanel(this);
-        ImageIcon imageIcon;
         try {
-            imageIcon = new ImageIcon(Objects.requireNonNull(MyPanel.class.getResource("/images/logo64.png")));
-            this.setIconImage(imageIcon.getImage());
+            ico = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/ico.png"));
         } catch (Exception e) {
-            System.out.println("未找到 logo64.png");
+            System.out.println("未找到 ico.png");
         }
+        this.setIconImage(ico);
 
         this.add(myPanel);
         this.addKeyListener(myPanel);
