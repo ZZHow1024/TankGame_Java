@@ -76,7 +76,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         this.tankGame02 = tankGame02;
 
         //初始化我方坦克
-        this.myTank = new MyTank(450, 300, MyPanel.UPWARD, 3);
+        this.myTank = new MyTank(450, 550, MyPanel.UPWARD, 3);
 
         //初始化敌方坦克
         for (int i = 0; i < enemyTankQuantity; i++) {
