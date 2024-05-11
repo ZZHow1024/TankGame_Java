@@ -9,7 +9,7 @@
 ---
 Website：
 
-[[Java项目]坦克大战_TankGame | ZZHow](https://www.zzhow.com/article/TankGame)
+[[Java项目]坦克大战_TankGame | ZZHow](https://www.zzhow.com/TankGame)
 
 Source Code：
 
@@ -25,12 +25,7 @@ https://github.com/ZZHow1024/TankGame_Java/releases
 
 - 确定您使用的操作系统
     - Windows：
-        - 确定您的 CPU 架构
-            - 选择 arm/x86
-        - 确定您的电脑是 64位/32位
-            - 选择 64bit/32bit
-        - 确定您是否安装了 JDK/JRE
-            - 选择 exe版/带有WithJRE标识的压缩包版
+        - 选择 .zip压缩包/.exe安装包/.msi安装包
     - Linux：
         - 选择 .deb安装包/.rpm安装包
     - macOS：
@@ -47,6 +42,14 @@ https://github.com/ZZHow1024/TankGame_Java/releases
     - 游戏面板绘制（灰色矩形）
     - 我方坦克绘制，并可实现 WASD 键控制坦克 上左下右 移动
     - 敌方坦克绘制，不可移动
+- TankGame2.0
+    - 敌方坦克可随机移动
+    - 敌方坦克可随机发射子弹
+    - 我方坦克可通过空格键发射子弹
+    - 游戏胜利/失败判断
+    - 显示游戏时间
+    - 游戏开始确认
+    - 游戏重玩
 
 ---
 
@@ -54,9 +57,11 @@ https://github.com/ZZHow1024/TankGame_Java/releases
 
 - TankGame1.0
     - Java 集合类(`Vector`)
-    - Java 绘图(`JFrame类`、`Panel类`、`Graphics类` 和 `Color`类)
+    - Java 绘图(`JFrame类`、`Panel类`、`Graphics类` 和 `Color类`)
     - 读取图片(`getImage()方法` 和 `getResource()方法`)
     - 键盘监听(`KeyListener接口` 与 其中的 `keyPressed()方法`)
+- TankGame2.0
+    - Java 多线程(继承 `Thread类`/实现 `Runnable接口`)
 
 ---
 
@@ -65,3 +70,7 @@ https://github.com/ZZHow1024/TankGame_Java/releases
 ![Tank Game 1.0](https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4b165318-6383-451c-8845-110b786c9f0a%2F1f69128c-ff77-4a30-ad43-235842eb361f%2FTankGame1.0.png?table=block&id=eb7c1e37-5851-4b48-97cd-cf371603d957&t=eb7c1e37-5851-4b48-97cd-cf371603d957&width=1482&cache=v2)
 
 Tank Game 1.0
+
+![Tank Game 2.0](https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4b165318-6383-451c-8845-110b786c9f0a%2F1c716d7d-99de-47cc-99d9-9d2986df0863%2FTankGame2.0.png?table=block&id=0b8e553c-7f0a-41ca-896c-d9388ce3c02a&t=0b8e553c-7f0a-41ca-896c-d9388ce3c02a&width=708&cache=v2)
+
+Tank Game 2.0
