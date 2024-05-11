@@ -25,12 +25,7 @@ https://github.com/ZZHow1024/TankGame_Java/releases
 
 - 确定您使用的操作系统
     - Windows：
-        - 确定您的 CPU 架构
-            - 选择 arm/x86
-        - 确定您的电脑是 64位/32位
-            - 选择 64bit/32bit
-        - 确定您是否安装了 JDK/JRE
-            - 选择 exe版/带有WithJRE标识的压缩包版
+        - 选择 .zip压缩包/.exe安装包/.msi安装包
     - Linux：
         - 选择 .deb安装包/.rpm安装包
     - macOS：
