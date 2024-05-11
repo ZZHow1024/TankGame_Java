@@ -43,28 +43,18 @@ public class EnemyTank extends Tank implements Runnable {
     }
 
     public void shootBullet() {
-        Bullet bullet;
         if (this.currentBulletNumber > 0) {
             //当前子弹数减 1
             --this.currentBulletNumber;
 
             //创建 Bullet 对象
-            switch (this.getDirection()) {
-                case MyPanel.UPWARD:
-                    bullet = new Bullet(this.getX() + 17, this.getY() - 3, this.getDirection());
-                    break;
-                case MyPanel.DOWNWARD:
-                    bullet = new Bullet(this.getX() + 17, this.getY() + 57, this.getDirection());
-                    break;
-                case MyPanel.LEFT:
-                    bullet = new Bullet(this.getX() - 3, this.getY() + 17, this.getDirection());
-                    break;
-                case MyPanel.RIGHT:
-                    bullet = new Bullet(this.getX() + 57, this.getY() + 17, this.getDirection());
-                    break;
-                default:
-                    bullet = null;
-            }
+            Bullet bullet = switch (this.getDirection()) {
+                case MyPanel.UPWARD -> new Bullet(this.getX() + 17, this.getY() - 3, this.getDirection());
+                case MyPanel.DOWNWARD -> new Bullet(this.getX() + 17, this.getY() + 57, this.getDirection());
+                case MyPanel.LEFT -> new Bullet(this.getX() - 3, this.getY() + 17, this.getDirection());
+                case MyPanel.RIGHT -> new Bullet(this.getX() + 57, this.getY() + 17, this.getDirection());
+                default -> null;
+            };
 
             //启动子弹线程
             new Thread(bullet).start();
@@ -86,28 +76,20 @@ public class EnemyTank extends Tank implements Runnable {
                 if (random.nextInt(35) == 0)
                     this.shootBullet();
 
-                if (getY() <= 0)
+                if(getY() <= 0)
                     setDirection(MyPanel.DOWNWARD);
                 else if (getY() + 60 >= 750)
                     setDirection(MyPanel.UPWARD);
-                else if (getX() <= 0)
+                else if(getX() <= 0)
                     setDirection(MyPanel.RIGHT);
                 else if (getX() + 60 >= 750)
                     setDirection(MyPanel.LEFT);
 
                 switch (getDirection()) {
-                    case MyPanel.UPWARD:
-                        moveUp();
-                        break;
-                    case MyPanel.DOWNWARD:
-                        moveDown();
-                        break;
-                    case MyPanel.LEFT:
-                        moveLeft();
-                        break;
-                    case MyPanel.RIGHT:
-                        moveRight();
-                        break;
+                    case MyPanel.UPWARD -> moveUp();
+                    case MyPanel.DOWNWARD -> moveDown();
+                    case MyPanel.LEFT -> moveLeft();
+                    case MyPanel.RIGHT -> moveRight();
                 }
                 try {
                     Thread.sleep(25);

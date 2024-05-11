@@ -80,18 +80,10 @@ public class MyTank extends Tank implements Runnable {
     public void run() {
         while (loop && isLive()) {
             switch (move) {
-                case MyPanel.UPWARD:
-                    moveUp();
-                    break;
-                case MyPanel.DOWNWARD:
-                    moveDown();
-                    break;
-                case MyPanel.LEFT:
-                    moveLeft();
-                    break;
-                case MyPanel.RIGHT:
-                    moveRight();
-                    break;
+                case MyPanel.UPWARD -> moveUp();
+                case MyPanel.DOWNWARD -> moveDown();
+                case MyPanel.LEFT -> moveLeft();
+                case MyPanel.RIGHT -> moveRight();
             }
 
             try {
